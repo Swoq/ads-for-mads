@@ -1,0 +1,22 @@
+server:
+  port: "${SERVER_PORT:8082}"
+
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: "${SPRING_DATA_SOURCE_USERNAME:postgres}"
+    password: "${SPRING_DATA_SOURCE_PASSWORD:postgres}"
+    url: "${SPRING_DATA_SOURCE_URL:jdbc:postgresql://localhost:5432/postgres}"
+
+  jpa:
+    hibernate:
+      ddl-auto: "${SPRING_JPA_HIBERNATE_DDL_AUTO:update}"
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  mvc:
+    format:
+      date-time: iso
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
