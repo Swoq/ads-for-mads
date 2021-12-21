@@ -1,5 +1,6 @@
 package com.swoqe.adsformads;
 
+import com.swoqe.adsformads.model.Customer;
 import com.swoqe.adsformads.model.Order;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -11,6 +12,6 @@ public class RestMVcConfiguration implements RepositoryRestConfigurer {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-        config.exposeIdsFor(Order.class);
+        config.exposeIdsFor(Order.class, Customer.class);
     }
 }

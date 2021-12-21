@@ -4,6 +4,7 @@ import com.swoqe.adsformads.ResourceRoot;
 import com.swoqe.adsformads.model.Order;
 import com.swoqe.adsformads.model.dto.OrderDto;
 import com.swoqe.adsformads.model.dto.Price;
+import com.swoqe.adsformads.rest.CustomerRestResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import java.util.Optional;
 public class MainController {
 
     private final WebClient webClient = WebClient.create();
+    private final CustomerRestResource customerRestResource;
 
     @GetMapping("/")
     @ResponseBody
@@ -46,7 +48,12 @@ public class MainController {
                             .filter(price -> price.getOrderId().getId().equals(order.getId()))
                             .findFirst();
                 }
-                first.ifPresent(price -> response.add(OrderDto.builder().withId(order.getId()).withPrice(price.getValue()).build()));
+                first.ifPresent(price -> response.add(OrderDto.builder()
+                        .withId(order.getId())
+                        .withPrice(price.getValue())
+                        .withCustomerId(order.getCustomer().getId())
+                        .build())
+                );
             });
         }
 
